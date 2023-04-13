@@ -1,5 +1,6 @@
 package org.learning.java.springilmiofotoalbum.service;
 
+import org.learning.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Photo;
 import org.learning.java.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class PhotoService {
         if (result.isPresent()) {
             return result.get();
         } else {
-            throw new RuntimeException();
+            throw new PhotoNotFoundException("" + id);
         }
     }
 
@@ -54,7 +55,7 @@ public class PhotoService {
     }
 
     public boolean deleteById(Integer id) {
-        photoRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        photoRepository.findById(id).orElseThrow(() -> new PhotoNotFoundException("" + id));
         try {
             photoRepository.deleteById(id);
             return true;
