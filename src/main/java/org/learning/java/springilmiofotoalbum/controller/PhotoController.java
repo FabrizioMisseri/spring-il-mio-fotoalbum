@@ -1,6 +1,7 @@
 package org.learning.java.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
+import org.learning.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Category;
 import org.learning.java.springilmiofotoalbum.model.Photo;
 import org.learning.java.springilmiofotoalbum.service.CategoryService;
@@ -47,17 +48,15 @@ public class PhotoController {
             Photo photo = photoService.getById(id);
             model.addAttribute("photo", photo);
             return "/photos/show";
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto non con " + id + " non è stata trovata");
         }
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        //
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        //
         model.addAttribute("photo", new Photo());
         return "/photos/create";
     }
@@ -75,24 +74,32 @@ public class PhotoController {
     //
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
-        Photo photo = photoService.getById(id);
 
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-
-        model.addAttribute("photo", photo);
-        return "/photos/edit";
+        try {
+            Photo photo = photoService.getById(id);
+            List<Category> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
+            model.addAttribute("photo", photo);
+            return "/photos/edit";
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto non con " + id + " non è stata trovata");
+        }
     }
 
 
     @PostMapping("/edit/{id}")
     public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto,
                          BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             return "/photos/edit";
         }
-        photoService.update(id, formPhoto);
-        return "redirect:/photos/{id}";
+        try {
+            photoService.update(id, formPhoto);
+            return "redirect:/photos/{id}";
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto non con " + id + " non è stata trovata");
+        }
     }
 
 
@@ -100,15 +107,14 @@ public class PhotoController {
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             boolean success = photoService.deleteById(id);
-
             if (success) {
                 redirectAttributes.addFlashAttribute("message", "la cancellazione è andata a buon fine");
-                return "redirect:/photos";
             } else {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                redirectAttributes.addFlashAttribute("message", "la cancellazione non è andata a buon fine");
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La foto non con " + id + " non è stata trovata");
         }
+        return "redirect:/photos";
     }
 }
