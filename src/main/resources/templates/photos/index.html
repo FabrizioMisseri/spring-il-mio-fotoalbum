@@ -23,54 +23,55 @@
             <h1>Foto:</h1>
         </div>
 
-
         <div class="col text-end">
-<!--            <a th:href="@{/photos/create}" class="btn btn-primary px-4"-->
-<!--               sec:authorize="hasAuthority('ADMIN')">-->
-<!--                <i class="fa-solid fa-plus"></i>-->
-<!--                <i class="fa-solid fa-photo-slice"></i>-->
-<!--            </a>-->
+            <a th:href="@{/photos/create}" class="btn btn-primary px-4">
+                <!--               sec:authorize="hasAuthority('ADMIN')"-->
+                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-photo-slice"></i>
+            </a>
         </div>
     </div>
 
-<!--    <table class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th scope="col">Nome</th>-->
-<!--            <th scope="col">Descrizione</th>-->
-<!--            <th scope="col">Prezzo</th>-->
-<!--            <th scope="col" class="text-end">Actions</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="photo : ${photos}" th:object="${photo}">-->
-<!--            <th th:text="*{name}"></th>-->
-<!--            <td th:text="*{description}"></td>-->
-<!--            <td th:text="|*{price} €|"></td>-->
-<!--            <td class="text-end">-->
-<!--                <a th:href="@{|/photos/*{id}|}" class="btn btn-primary">-->
-<!--                    <i class="fa-solid fa-expand"></i>-->
-<!--                </a>-->
-<!--                <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-primary"-->
-<!--                   sec:authorize="hasAuthority('ADMIN')">-->
-<!--                    <i class="fa-solid fa-pen-to-square"></i>-->
-<!--                </a>-->
-<!--                <a th:href="@{|/photos/delete/*{id}|}" class="btn btn-primary"-->
-<!--                   sec:authorize="hasAuthority('ADMIN')">-->
-<!--                    <i class="fa-solid fa-delete-left"></i>-->
-<!--                </a>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-<!--/ TABLE-->
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Titolo</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col">Url</th>
+            <th scope="col">Visibilità</th>
+            <th scope="col" class="text-end">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="photo : ${photos}" th:object="${photo}">
+            <th th:text="*{title}"></th>
+            <td th:text="*{description}"></td>
+            <td th:text="*{url}"></td>
+            <td th:text="*{visible} ? si : no"></td>
+            <td class="text-end">
+                <a th:href="@{|/photos/*{id}|}" class="btn btn-primary">
+                    <i class="fa-solid fa-expand"></i>
+                </a>
+                <!--                <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-primary"-->
+                <!--                   sec:authorize="hasAuthority('ADMIN')">-->
+                <!--                    <i class="fa-solid fa-pen-to-square"></i>-->
+                <!--                </a>-->
+                <!--                <a th:href="@{|/photos/delete/*{id}|}" class="btn btn-primary"-->
+                <!--                   sec:authorize="hasAuthority('ADMIN')">-->
+                <!--                    <i class="fa-solid fa-delete-left"></i>-->
+                <!--                </a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--TABLE-->
 
-<!--else PIZZE-->
+<!--else -->
 <div class="container py-4" th:if="${photos.size() == 0}">
     <h4>Non ci sono foto</h4>
 </div>
-<!--/ else PIZZE-->
+<!--/ else -->
 
 
 </body>
