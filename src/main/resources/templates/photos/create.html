@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: resources}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="fragments/fragments :: navbar('photos', '', false)"></th:block>
+
+<div class="container">
+    <h1>Nuova Foto</h1>
+    <form id="photo-form" method="post" th:object="${photo}" th:action="@{/photos/create}"
+          class="row gy-3">
+        <!-- errors -->
+        <ul>
+            <li class="text-danger" th:each="err : ${#fields.allErrors() }" th:text="${err}"></li>
+        </ul>
+        <!-- title -->
+        <div class="col-12">
+            <label class="form-label" for="title">Titolo*</label>
+            <input type="text" id="title" class="form-control" th:field="*{title}">
+        </div>
+        <!-- description -->
+        <div class="col-12">
+            <label class="form-label" for="description">Descrizione*</label>
+            <textarea id="description" class="form-control" th:field="*{description}" rows="5"></textarea>
+        </div>
+        <!-- Url -->
+        <div class="col-12">
+            <label class="form-label" for="url">Url-foto*</label>
+            <input type="text" id="url" class="form-control" th:field="*{url}">
+        </div>
+
+
+        <!--Categories-->
+        <div class="mb-3">
+            <div th:each="category : ${categories}">
+
+                <input type="checkbox" th:field="*{categories}" th:value="${category.id}"
+                       th:id="|category-${category.id}|">
+                <label th:for="|category-${category.id}|" class="form-label" th:text="${category.name}"></label>
+
+            </div>
+        </div>
+
+        <!--SUBMIT-->
+        <div class="col-12 mt-5">
+            <!--<a class="btn btn-primary" th:href="@{/books}">Cancel</a>-->
+            <button type="submit" class="btn btn-primary">Salva</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -76,7 +76,7 @@ public class Photo {
     }
 
     public Set<Category> getCategories() {
-        return categories;
+        return this.categories;
     }
 
     public void setCategories(Set<Category> categories) {
@@ -84,6 +84,7 @@ public class Photo {
     }
 
     // EQUALS AND HASHCODE
+
 
     @Override
     public boolean equals(Object o) {
