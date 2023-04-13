@@ -1,6 +1,7 @@
 package org.learning.java.springilmiofotoalbum.controller;
 
 import jakarta.validation.Valid;
+import org.learning.java.springilmiofotoalbum.exceptions.CategoryNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Category;
 import org.learning.java.springilmiofotoalbum.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,9 @@ public class CategoryController {
             //
             model.addAttribute("category", category);
             return "/categories/edit";
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (CategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "La categoria con " + id + " non è stata trovata");
         }
     }
 
@@ -54,8 +56,13 @@ public class CategoryController {
 
     @PostMapping("/edit/{id}")
     public String update(@PathVariable Integer id, @Valid @ModelAttribute("category") Category formCategory) {
-        categoryService.updateCategory(formCategory, id);
-        return "redirect:/categories";
+        try {
+            categoryService.updateCategory(formCategory, id);
+            return "redirect:/categories";
+        } catch (CategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "La categoria con " + id + " non è stata trovata");
+        }
     }
 
     @GetMapping("/delete/{id}")
@@ -65,13 +72,14 @@ public class CategoryController {
 
             if (success) {
                 redirectAttributes.addFlashAttribute("message", "la cancellazione è andata a buon fine");
-                return "redirect:/categories";
             } else {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                redirectAttributes.addFlashAttribute("message", "la cancellazione non è andata a buon fine");
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (CategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "La categoria con " + id + " non è stata trovata");
         }
+        return "redirect:/categories";
     }
 
 }

@@ -1,5 +1,6 @@
 package org.learning.java.springilmiofotoalbum.service;
 
+import org.learning.java.springilmiofotoalbum.exceptions.CategoryNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Category;
 import org.learning.java.springilmiofotoalbum.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,7 @@ public class CategoryService {
     }
 
     public Category getById(Integer id) {
-        Optional<Category> result = categoryRepository.findById(id);
-        if (result.isPresent()) {
-            return result.get();
-        } else {
-            throw new RuntimeException();
-        }
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("" + id));
     }
 
 
@@ -41,7 +37,7 @@ public class CategoryService {
     }
 
     public boolean deleteById(Integer id) {
-        categoryRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        getById(id);
         try {
             categoryRepository.deleteById(id);
             return true;
