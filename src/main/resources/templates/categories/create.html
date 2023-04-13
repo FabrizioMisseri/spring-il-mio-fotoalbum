@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: resources}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<th:block th:replace="fragments/fragments :: navbar('categories', '', false)"></th:block>
+
+<div class="container">
+    <h1>Nuova Categoria</h1>
+    <form id="category-form" method="post" th:object="${category}" th:action="@{/categories/create}"
+          class="row gy-3">
+        <!-- errors -->
+        <ul>
+            <li class="text-danger" th:each="err : ${#fields.allErrors() }" th:text="${err}"></li>
+        </ul>
+        <!-- name -->
+        <div class="col-12">
+            <label class="form-label" for="name">Nome*</label>
+            <input type="text" id="name" class="form-control" th:field="*{name}">
+        </div>
+        <!--SUBMIT-->
+        <div class="col-12 mt-5">
+            <button type="submit" class="btn btn-primary">Salva</button>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

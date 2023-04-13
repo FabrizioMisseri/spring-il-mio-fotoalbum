@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: resources}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<th:block th:replace="fragments/fragments :: navbar('categories', '', false)"></th:block>
+
+
+<!--TABLE-->
+<div class="container py-4" th:if="${categories.size() > 0}">
+
+    <div th:if="${message}" th:text="${message}" class="text-danger mb-4"></div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <h1>Categorie foto:</h1>
+        </div>
+        <!--  -->
+        <div class="col text-end">
+            <a th:href="@{/categories/create}" class="btn btn-primary px-4">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col" class="text-end">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}" th:object="${category}">
+            <td th:text="*{name}"></td>
+            <td class="text-end">
+                <a th:href="@{|/categories/edit/*{id}|}" class="btn btn-primary">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a th:href="@{|/categories/delete/*{id}|}" class="btn btn-primary">
+                    <i class="fa-solid fa-delete-left"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--/ TABLE-->
+
+<!--else-->
+<div class="container py-4" th:if="${categories.size() == 0}">
+    <h4>Non ci sono ingrdienti</h4>
+</div>
 
 </body>
 </html>
