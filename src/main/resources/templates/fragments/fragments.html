@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <th:block th:fragment="resources">
+        <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+        <link th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" th:rel="stylesheet"/>
+        <link rel="stylesheet" th:href="@{/css/app.css}">
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/6.3.0/css/all.min.css}">
+    </th:block>
+</head>
+<body>
+
+<!--NAVBAR-->
+<!--DA CORREGERE-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"
+     th:fragment="navbar(current, keyword, showSearch)">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">LOGO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbar-content"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-content">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/photos}"
+                       th:classAppend="${current == 'photos'} ? active : not-active">Photos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/categories}"
+                       th:classAppend="${current == 'categories'} ? active : not-active">Categories</a>
+                </li>
+            </ul>
+            <form
+                    th:if="${showSearch}"
+                    class="d-flex"
+                    role="search"
+                    method="get"
+                    th:action="@{/photos}"
+            >
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                       name="q" th:value="${keyword}">
+                <button class="btn btn-outline-light" type="submit"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <div class="ms-5 text-light">
+                <span sec:authentication="name"></span>
+                <a class="btn btn-info ms-2" th:href="@{/logout}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--/ NAVBAR-->
+
+
+</body>
+</html>

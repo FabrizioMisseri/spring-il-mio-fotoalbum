@@ -3,9 +3,11 @@ package org.learning.java.springilmiofotoalbum.service;
 import org.learning.java.springilmiofotoalbum.model.Photo;
 import org.learning.java.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PhotoService {
 
     @Autowired
