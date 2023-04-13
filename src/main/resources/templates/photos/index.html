@@ -27,7 +27,6 @@
             <a th:href="@{/photos/create}" class="btn btn-primary px-4">
                 <!--               sec:authorize="hasAuthority('ADMIN')"-->
                 <i class="fa-solid fa-plus"></i>
-                <i class="fa-solid fa-photo-slice"></i>
             </a>
         </div>
     </div>
@@ -52,14 +51,14 @@
                 <a th:href="@{|/photos/*{id}|}" class="btn btn-primary">
                     <i class="fa-solid fa-expand"></i>
                 </a>
-                <!--                <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-primary"-->
-                <!--                   sec:authorize="hasAuthority('ADMIN')">-->
-                <!--                    <i class="fa-solid fa-pen-to-square"></i>-->
-                <!--                </a>-->
-                <!--                <a th:href="@{|/photos/delete/*{id}|}" class="btn btn-primary"-->
-                <!--                   sec:authorize="hasAuthority('ADMIN')">-->
-                <!--                    <i class="fa-solid fa-delete-left"></i>-->
-                <!--                </a>-->
+                <a th:href="@{|/photos/edit/*{id}|}" class="btn btn-primary">
+                    <!--                   sec:authorize="hasAuthority('ADMIN')"-->
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a th:href="@{|/photos/delete/*{id}|}" class="btn btn-primary">
+                    <!--                   sec:authorize="hasAuthority('ADMIN')"-->
+                    <i class="fa-solid fa-delete-left"></i>
+                </a>
             </td>
         </tr>
         </tbody>

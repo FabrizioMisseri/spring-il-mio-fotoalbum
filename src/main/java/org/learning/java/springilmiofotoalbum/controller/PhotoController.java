@@ -55,7 +55,7 @@ public class PhotoController {
     @GetMapping("/create")
     public String create(Model model) {
         //
-        List<Category> categories = categoryService.getAllCategory();
+        List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         //
         model.addAttribute("photo", new Photo());
@@ -70,5 +70,45 @@ public class PhotoController {
         }
         photoService.createPhoto(formPhoto);
         return "redirect:/photos";
+    }
+
+    //
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Photo photo = photoService.getById(id);
+
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+
+        model.addAttribute("photo", photo);
+        return "/photos/edit";
+    }
+
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/photos/edit";
+        }
+        photoService.update(id, formPhoto);
+        return "redirect:/photos/{id}";
+    }
+
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            boolean success = photoService.deleteById(id);
+
+            if (success) {
+                redirectAttributes.addFlashAttribute("message", "la cancellazione è andata a buon fine");
+                return "redirect:/photos";
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -40,4 +40,25 @@ public class PhotoService {
         return photoRepository.save(photoToPersist);
     }
 
+    //
+
+    public Photo update(Integer id, Photo formPhoto) {
+        Photo photoToUpdate = getById(id);
+        photoToUpdate.setTitle(formPhoto.getTitle());
+        photoToUpdate.setDescription(formPhoto.getDescription());
+        photoToUpdate.setUrl(formPhoto.getUrl());
+        photoToUpdate.setCategories(formPhoto.getCategories());
+        return photoRepository.save(photoToUpdate);
+    }
+
+    public boolean deleteById(Integer id) {
+        photoRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        try {
+            photoRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

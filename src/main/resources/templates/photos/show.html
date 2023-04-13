@@ -12,23 +12,20 @@
     <div class="row">
         <div class="col-6">
             <h3 class="mb-4">FOTO: [[${photo.title}]]</h3>
-            <p>descrizione: [[${photo.description}]]</p>
-            <p>visible(debug): [[${photo.visible}]]</p>
+            <p class="mb-3">descrizione: [[${photo.description}]]</p>
+            <p>visibile: [[${photo.visible} ? 'si' : 'no']]</p>
+            <div th:if="${photo.categories.size() > 0}">
+                <h6>CATEGORIE:</h6>
+                <ul style="list-style: none">
+                    <li th:each="category : ${photo.categories}" th:text="${category.name}"></li>
+                </ul>
+            </div>
         </div>
 
         <div class="col-6">
             <img th:src="${photo.url}">
         </div>
     </div>
-
-
-    <!--CATEGORIES-->
-    <!--  <div>-->
-    <!--    <h6>CATEGORIE:</h6>-->
-    <!--    <ul style="list-style: none">-->
-    <!--      <li th:each="ingredient : ${pizza.ingredients}" th:text="${ingredient.name}"></li>-->
-    <!--    </ul>-->
-    <!--  </div>-->
 
 
 </div>
