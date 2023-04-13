@@ -32,7 +32,7 @@
         </div>
 
         <!--Categories-->
-        <div class="mb-3">
+        <div class="col-12 mb-3">
             <div th:each="category : ${categories}">
                 <input type="checkbox" th:field="*{categories}" th:value="${category.id}"
                        th:id="|category-${category.id}|">

@@ -36,6 +36,7 @@ public class PhotoService {
         photoToPersist.setTitle(formPhoto.getTitle());
         photoToPersist.setDescription(formPhoto.getDescription());
         photoToPersist.setUrl(formPhoto.getUrl());
+        photoToPersist.setVisible(formPhoto.getVisible());
         photoToPersist.setCategories(formPhoto.getCategories());
         return photoRepository.save(photoToPersist);
     }
@@ -47,6 +48,7 @@ public class PhotoService {
         photoToUpdate.setTitle(formPhoto.getTitle());
         photoToUpdate.setDescription(formPhoto.getDescription());
         photoToUpdate.setUrl(formPhoto.getUrl());
+        photoToUpdate.setVisible(formPhoto.getVisible());
         photoToUpdate.setCategories(formPhoto.getCategories());
         return photoRepository.save(photoToUpdate);
     }
