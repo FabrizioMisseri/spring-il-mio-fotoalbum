@@ -1,6 +1,7 @@
 package org.learning.java.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 import java.util.Set;
@@ -21,9 +22,17 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "Il titolo è obbligatorio")
+    @Column(nullable = false)
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
+
+    @NotBlank(message = "URL obbligatorio")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String url;
+
     private Boolean visible;
 
     @ManyToMany
