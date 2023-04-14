@@ -1,9 +1,13 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import NavBar from '../components/NavBar.vue';
 
 export default {
     name: 'HomePage',
+    components: {
+        NavBar,
+    },
 
     data() {
         return {
@@ -28,6 +32,7 @@ export default {
 </script>
 
 <template>
+    <NavBar></NavBar>
     <div class="container py-5">
         <div class="row mb-5">
             <div class="col-6">

@@ -1,10 +1,15 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
-import HomePage from './HomePage.vue';
+import NavBar from '../components/NavBar.vue';
+
 
 export default {
     name: 'SecondPage',
+
+    components: {
+        NavBar,
+    },
 
     data() {
         return {
@@ -32,6 +37,7 @@ export default {
 </script>
 
 <template>
+    <NavBar></NavBar>
     <div class="container">
         <div class="row pt-5">
             <div class="col-10 offset-1 mb-5">
