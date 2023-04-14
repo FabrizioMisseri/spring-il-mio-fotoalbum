@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: resources}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<th:block th:replace="fragments/fragments :: navbar('msgs', ${keyword}, false)"></th:block>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="mb-4">MESSAGIO: [[${msg.email}]]</h3>
+            <p class="mb-3">descrizione: [[${msg.message}]]</p>
+        </div>
+    </div>
+
+
+</div>
 
 </body>
 </html>

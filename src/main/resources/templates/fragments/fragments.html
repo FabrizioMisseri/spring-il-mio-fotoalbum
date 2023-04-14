@@ -40,6 +40,10 @@
                     <a class="nav-link" th:href="@{/categories}"
                        th:classAppend="${current == 'categories'} ? active : not-active">Categories</a>
                 </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" th:href="@{/msgs}"
+                       th:classAppend="${current == 'msgs'} ? active : not-active">Messages</a>
+                </li>
             </ul>
             <form
                     th:if="${showSearch}"
