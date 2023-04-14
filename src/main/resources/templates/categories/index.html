@@ -51,7 +51,12 @@
 
 <!--else-->
 <div class="container py-4" th:if="${categories.size() == 0}">
-    <h4>Non ci sono ingrdienti</h4>
+    <h4>
+        Non ci sono categorie,
+        <a th:href="@{/categories/create}">
+            aggiungine una
+        </a>
+    </h4>
 </div>
 
 </body>

@@ -40,8 +40,9 @@ export default {
             <div class="col-10 offset-1">
                 <div class="card p-3">
                     <form class="form-group" action="">
-                        <input v-model="email" type="text" class="form-control mb-2">
-                        <textarea v-model="message" class="form-control mb-2" rows="10"></textarea>
+                        <input v-model="email" type="text" class="form-control mb-2" placeholder="address email">
+                        <textarea v-model="message" class="form-control mb-2" rows="10"
+                            placeholder="inserisci il testo del messaggio"></textarea>
                         <button @click.prevent="axiosPostCreate(email, message)"
                             class="btn btn-primary mt-4 px-4">Invia</button>
                     </form>

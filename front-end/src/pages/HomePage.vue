@@ -35,9 +35,12 @@ export default {
                     @keyup.enter="axiosCall(this.store.query)" placeholder="cerca una foto">
             </div>
 
+            <!-- debug -->
             <div class="col-6 text-end">
-                <RouterLink :to="{ name: 'second' }" class="btn btn-primary">Iserisci una photo</RouterLink>
+                <RouterLink :to="{ name: 'second' }" class="btn btn-primary">Scrivi un messaggio</RouterLink>
             </div>
+            <!-- debug -->
+
         </div>
         <div class="row">
 

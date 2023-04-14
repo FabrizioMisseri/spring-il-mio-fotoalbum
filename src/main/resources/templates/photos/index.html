@@ -65,7 +65,12 @@
 
 <!--else -->
 <div class="container py-4" th:if="${photos.size() == 0}">
-    <h4>Non ci sono foto</h4>
+    <h4>
+        Non ci sono foto,
+        <a th:href="@{/photos/create}">
+            aggiungine una
+        </a>
+    </h4>
 </div>
 <!--/ else -->
 
