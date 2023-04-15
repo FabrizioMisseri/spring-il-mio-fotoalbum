@@ -47,12 +47,14 @@ export default {
             <!-- debug -->
 
         </div>
-        <div class="row">
+        <div class="row g-4">
 
-            <div v-for="(photo, index) in arrayPhotos" :key="index">
-                <div class="mb-4 py-3" v-if="photo.visible">
+            <div v-for="(photo, index) in arrayPhotos" :key="index" v-show="photo.visible" class="mb-3 px-5 col-6">
+
+                <div class="container-fluid card py-5">
+
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <ul>
                                 <li>
                                     <h4>{{ photo.title }}</h4>
@@ -65,11 +67,13 @@ export default {
                             </ul>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-6">
                             <img :src="photo.url" alt="" class="photo-img">
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
         </div>
@@ -82,7 +86,7 @@ ul {
 }
 
 .photo-img {
-    max-width: 400px;
+    max-width: 100%;
 }
 
 #search-bar {

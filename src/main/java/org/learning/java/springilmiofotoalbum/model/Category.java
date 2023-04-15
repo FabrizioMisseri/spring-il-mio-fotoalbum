@@ -1,10 +1,12 @@
 package org.learning.java.springilmiofotoalbum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,8 +15,9 @@ import java.util.Set;
 public class Category {
 
     @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Photo> photos;
+    List<Photo> photos;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,24 +44,11 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Photo> getPhotos() {
+    public List<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(Set<Photo> photos) {
+    public void setPhotos(List<Photo> photos) {
         this.photos = photos;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(getPhotos(), category.getPhotos()) && Objects.equals(getId(), category.getId()) && Objects.equals(getName(), category.getName());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getPhotos(), getId(), getName());
     }
 }

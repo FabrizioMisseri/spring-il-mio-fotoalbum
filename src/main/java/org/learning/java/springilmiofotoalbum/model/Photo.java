@@ -42,6 +42,8 @@ public class Photo {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
 
+    @OneToOne(mappedBy = "photo")
+    private Image cover;
 
     // GETTERS AND SETTERS
     public Integer getId() {
@@ -92,9 +94,15 @@ public class Photo {
         this.categories = categories;
     }
 
+    public Image getCover() {
+        return cover;
+    }
+
+    public void setCover(Image cover) {
+        this.cover = cover;
+    }
+
     // EQUALS AND HASHCODE
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,4 +115,6 @@ public class Photo {
     public int hashCode() {
         return Objects.hash(getId(), getTitle(), getDescription(), getUrl(), getVisible(), getCategories());
     }
+
+
 }

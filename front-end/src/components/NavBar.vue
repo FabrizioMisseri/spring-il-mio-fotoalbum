@@ -18,10 +18,14 @@ export default {
             <div class="collapse navbar-collapse" id="navbar-content">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <RouterLink class="nav-link not-active" :to="{ name: 'home' }">Photos</RouterLink>
+                        <RouterLink class="nav-link" :to="{ name: 'home' }"
+                            :class="(this.$route.name == 'home') ? 'active' : 'not-active'">
+                            Photos</RouterLink>
                     </li>
                     <li class="nav-item">
-                        <RouterLink class="nav-link not-active" :to="{ name: 'second' }">Contacts</RouterLink>
+                        <RouterLink class="nav-link" :to="{ name: 'second' }"
+                            :class="(this.$route.name == 'second') ? 'active' : 'not-active'">
+                            Contacts</RouterLink>
                     </li>
                 </ul>
             </div>

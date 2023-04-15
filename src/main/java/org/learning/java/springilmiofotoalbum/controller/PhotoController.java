@@ -65,6 +65,8 @@ public class PhotoController {
     public String store(@Valid @ModelAttribute("photo") Photo formPhoto,
                         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            List<Category> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
             return "/photos/create";
         }
         photoService.createPhoto(formPhoto);
@@ -89,9 +91,11 @@ public class PhotoController {
 
     @PostMapping("/edit/{id}")
     public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            List<Category> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
             return "/photos/edit";
         }
         try {
