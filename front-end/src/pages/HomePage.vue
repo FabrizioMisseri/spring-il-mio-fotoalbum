@@ -36,11 +36,11 @@ export default {
     <div class="container py-5">
         <div class="row mb-5">
 
-            <div class="col px-5">
+            <div class="col-6 px-5 d-flex justify-content-between">
                 <input id="search-bar" class="form-control d-inline" type="text" v-model="this.store.query"
                     @keyup.enter="axiosCall(this.store.query)" placeholder="cerca una foto">
 
-                <RouterLink :to="{ name: 'second' }" class="ms-4 btn btn-primary">
+                <RouterLink :to="{ name: 'second' }" class="btn btn-primary">
                     Scrivi un messaggio
                 </RouterLink>
             </div>
