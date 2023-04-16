@@ -45,6 +45,7 @@ public class Photo {
     @OneToOne(mappedBy = "photo")
     private Image cover;
 
+
     // GETTERS AND SETTERS
     public Integer getId() {
         return id;
