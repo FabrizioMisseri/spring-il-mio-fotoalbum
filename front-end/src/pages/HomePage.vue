@@ -68,7 +68,8 @@ export default {
                         </div>
 
                         <div class="col-6">
-                            <img :src="photo.url" alt="" class="photo-img">
+                            <!-- <img :src="photo.url" alt="" class="photo-img"> -->
+
                         </div>
                     </div>
 
