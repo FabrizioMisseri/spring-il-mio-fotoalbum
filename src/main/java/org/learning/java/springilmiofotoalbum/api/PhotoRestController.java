@@ -20,7 +20,7 @@ public class PhotoRestController {
     PhotoService photoService;
 
     @GetMapping
-    public List<Photo> pizzaList(@RequestParam(name = "q") Optional<String> search) {
+    public List<Photo> photoList(@RequestParam(name = "q") Optional<String> search) {
 
         if (search.isPresent()) {
             return photoService.getFilteredPhotos(search.get());
