@@ -39,6 +39,7 @@ public class PhotoService {
         photoToPersist.setUrl(formPhoto.getUrl());
         photoToPersist.setVisible(formPhoto.getVisible());
         photoToPersist.setCategories(formPhoto.getCategories());
+        
         return photoRepository.save(photoToPersist);
     }
 
