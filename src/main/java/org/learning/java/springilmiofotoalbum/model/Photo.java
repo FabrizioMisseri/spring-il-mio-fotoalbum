@@ -42,8 +42,6 @@ public class Photo {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
 
-    @OneToOne(mappedBy = "photo")
-    private Image cover;
 
     // GETTERS AND SETTERS
     public Integer getId() {
@@ -94,13 +92,6 @@ public class Photo {
         this.categories = categories;
     }
 
-    public Image getCover() {
-        return cover;
-    }
-
-    public void setCover(Image cover) {
-        this.cover = cover;
-    }
 
     // EQUALS AND HASHCODE
     @Override

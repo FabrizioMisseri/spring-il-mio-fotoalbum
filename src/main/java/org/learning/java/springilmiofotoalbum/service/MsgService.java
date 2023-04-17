@@ -2,7 +2,6 @@ package org.learning.java.springilmiofotoalbum.service;
 
 import jakarta.validation.Valid;
 import org.learning.java.springilmiofotoalbum.exceptions.MsgNotFoundException;
-import org.learning.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Msg;
 import org.learning.java.springilmiofotoalbum.repository.MsgRepository;
 import org.springframework.beans.factory.annotation.Autowired;
