@@ -74,9 +74,17 @@ public class PhotoService {
     // COVER - IMAGE
     public Image updateCover(Integer id, ImageForm imageForm)
             throws PhotoNotFoundException, IOException {
-        Photo book = getById(id);
+        Photo photo = getById(id);
+        // IF image exist -> delete
+        Image oldImage = photo.getCover();
+        if (oldImage != null) {
+            // detach
+            photo.setCover(null);
+            oldImage.setPhoto(null);
+            imageRepository.delete(oldImage);
+        }
         Image newImage = new Image();
-        newImage.setPhoto(book);
+        newImage.setPhoto(photo);
         newImage.setContent(imageForm.getMultipartFile().getBytes());
         return imageRepository.save(newImage);
     }
