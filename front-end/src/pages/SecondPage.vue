@@ -21,7 +21,7 @@ export default {
 
     methods: {
         axiosPostCreate(email, message) {
-            axios.post(`${this.store.baseApiUrlMsg}/create`, {
+            axios.post(`${this.store.baseApiUrlMsg}`, {
                 email: email,
                 message: message,
             }).then((resp) => {
