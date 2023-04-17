@@ -21,7 +21,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/photos")
 public class PhotoController {
-
+    // CIAO
     @Autowired
     PhotoService photoService;
     @Autowired
