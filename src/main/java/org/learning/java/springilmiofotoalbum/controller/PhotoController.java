@@ -3,6 +3,7 @@ package org.learning.java.springilmiofotoalbum.controller;
 import jakarta.validation.Valid;
 import org.learning.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.learning.java.springilmiofotoalbum.model.Category;
+import org.learning.java.springilmiofotoalbum.model.ImageForm;
 import org.learning.java.springilmiofotoalbum.model.Photo;
 import org.learning.java.springilmiofotoalbum.service.CategoryService;
 import org.learning.java.springilmiofotoalbum.service.PhotoService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,4 +123,33 @@ public class PhotoController {
         }
         return "redirect:/photos";
     }
+
+    // COVER - IMAGE
+
+    @GetMapping("/{id}/cover")
+    public String editCover(@PathVariable Integer id, Model model) {
+        try {
+            Photo photo = photoService.getById(id);
+            ImageForm imageForm = new ImageForm();
+            imageForm.setPhoto(photo);
+            model.addAttribute("imageForm", imageForm);
+            return "/photos/cover";
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{id}/cover/save")
+    public String updateCover(@PathVariable Integer id, @ModelAttribute ImageForm imageForm,
+                              RedirectAttributes redirectAttributes) {
+        try {
+            photoService.updateCover(id, imageForm);
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("message", "Unable to update photo cover");
+        } catch (PhotoNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return "redirect:/photos/" + id;
+    }
+
 }

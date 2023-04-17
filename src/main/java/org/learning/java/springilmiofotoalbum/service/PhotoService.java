@@ -1,11 +1,15 @@
 package org.learning.java.springilmiofotoalbum.service;
 
 import org.learning.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
+import org.learning.java.springilmiofotoalbum.model.Image;
+import org.learning.java.springilmiofotoalbum.model.ImageForm;
 import org.learning.java.springilmiofotoalbum.model.Photo;
+import org.learning.java.springilmiofotoalbum.repository.ImageRepository;
 import org.learning.java.springilmiofotoalbum.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +18,9 @@ public class PhotoService {
 
     @Autowired
     PhotoRepository photoRepository;
+
+    @Autowired
+    ImageRepository imageRepository;
 
     public List<Photo> getAllPhotos() {
         return photoRepository.findAll();
@@ -62,6 +69,16 @@ public class PhotoService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    // COVER - IMAGE
+    public Image updateCover(Integer id, ImageForm imageForm)
+            throws PhotoNotFoundException, IOException {
+        Photo book = getById(id);
+        Image newImage = new Image();
+        newImage.setPhoto(book);
+        newImage.setContent(imageForm.getMultipartFile().getBytes());
+        return imageRepository.save(newImage);
     }
 
 }

@@ -22,7 +22,22 @@
         </div>
 
         <div class="col-6">
-            <img th:src="${photo.url}">
+            <!--            <img th:src="${photo.url}">-->
+            <div class="h-100 position-relative">
+                <a th:href="@{|/photos/*{id}/cover|}"
+                   class="btn btn-primary rounded-circle position-absolute bottom-0 end-0">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <div
+                        th:if="${photo.cover == null || photo.cover.content == null}"
+                        class="bg-secondary h-100 fs-1 d-flex justify-content-center align-items-center"
+                >
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                <div th:unless="${photo.cover == null || photo.cover.content == null}">
+                    <img class="img-fluid" th:src="@{|/files/${photo.cover.id}|}" alt="photo cover">
+                </div>
+            </div>
         </div>
     </div>
 
