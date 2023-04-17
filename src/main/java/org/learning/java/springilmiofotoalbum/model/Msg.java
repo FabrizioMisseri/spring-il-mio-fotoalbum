@@ -15,6 +15,7 @@ public class Msg {
     @Column(nullable = false)
     private String email;
 
+    @Column(columnDefinition = "TEXT")
     private String message;
 
     public Integer getId() {

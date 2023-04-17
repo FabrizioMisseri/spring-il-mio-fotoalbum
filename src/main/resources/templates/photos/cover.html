@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/fragments :: resources}">
+    <title>Document</title>
+</head>
+<body>
+<th:block th:replace="fragments/fragments :: navbar('photos', ${keyword}, true)"></th:block>
+
+<div class="container">
+    <h1>Photo Cover-Image</h1>
+    <form
+            id="cover-form"
+            method="post"
+            th:object="${imageForm}"
+            th:action="@{|/photos/${imageForm.photo.id}/cover/save|}"
+            class="row gy-3"
+            enctype="multipart/form-data"
+    >
+        <!-- errors -->
+        <ul>
+            <li th:each="err : ${#fields.globalErrors() }" th:text="${err}"></li>
+        </ul>
+
+        <div class="col-6">
+            <!-- multipartFile -->
+            <div class="col-12">
+                <input type="file" id="multipartFile" class="form-control" th:field="*{multipartFile}">
+            </div>
+
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Salva</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
