@@ -35,6 +35,8 @@ public class Photo {
 
     private Boolean visible;
 
+    private Boolean photoView = false;
+
     @ManyToMany
     @JoinTable(
             name = "photo_category",
@@ -85,6 +87,14 @@ public class Photo {
 
     public void setVisible(Boolean visible) {
         this.visible = visible;
+    }
+
+    public Boolean getPhotoView() {
+        return photoView;
+    }
+
+    public void setPhotoView(Boolean photoView) {
+        this.photoView = photoView;
     }
 
     public Set<Category> getCategories() {

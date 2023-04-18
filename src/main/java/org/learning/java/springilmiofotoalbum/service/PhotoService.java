@@ -42,6 +42,7 @@ public class PhotoService {
             copyP.setTitle(p.getTitle());
             copyP.setDescription(p.getDescription());
             copyP.setVisible(p.getVisible());
+            copyP.setPhotoView(p.getPhotoView());
             filteredPhotos.add(copyP);
         }
         return filteredPhotos;
@@ -92,6 +93,7 @@ public class PhotoService {
     public Image updateCover(Integer id, ImageForm imageForm)
             throws PhotoNotFoundException, IOException {
         Photo photo = getById(id);
+        photo.setPhotoView(true);
         // IF image exist -> delete
         Image oldImage = photo.getCover();
         if (oldImage != null) {
