@@ -35,7 +35,7 @@ public class Photo {
 
     private Boolean visible;
 
-    private Boolean photoView = false;
+    private Boolean photoView;
 
     @ManyToMany
     @JoinTable(

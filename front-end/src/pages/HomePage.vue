@@ -67,7 +67,7 @@ export default {
                             </ul>
                         </div>
 
-                        <div class="col-6" v-if="`http://localhost:8080/files/${photo.id}`">
+                        <div class="col-6" v-if="photo.photoView">
                             <img :src="`http://localhost:8080/files/${photo.id}`" alt="" class="photo-img">
 
                         </div>
