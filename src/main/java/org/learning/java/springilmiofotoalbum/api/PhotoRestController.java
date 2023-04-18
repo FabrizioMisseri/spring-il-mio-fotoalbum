@@ -23,7 +23,7 @@ public class PhotoRestController {
     public List<Photo> photoList(@RequestParam(name = "q") Optional<String> search) {
 
         if (search.isPresent()) {
-            return photoService.getFilteredPhotos(search.get());
+            return photoService.getFilteredPhotosApi(search.get());
         }
         return photoService.getAllPhotos();
     }

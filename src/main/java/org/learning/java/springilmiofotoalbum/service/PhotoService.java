@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,22 @@ public class PhotoService {
 
     public List<Photo> getFilteredPhotos(String keyword) {
         return photoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
+    // get all-photos API
+    public List<Photo> getFilteredPhotosApi(String keyword) {
+        List<Photo> photos = getFilteredPhotos(keyword);
+        List<Photo> filteredPhotos = new ArrayList<>();
+        // id, title, description
+        for (Photo p : photos) {
+            Photo copyP = new Photo();
+            copyP.setId(p.getId());
+            copyP.setTitle(p.getTitle());
+            copyP.setDescription(p.getDescription());
+            copyP.setVisible(p.getVisible());
+            filteredPhotos.add(copyP);
+        }
+        return filteredPhotos;
     }
 
     public Photo getById(Integer id) {

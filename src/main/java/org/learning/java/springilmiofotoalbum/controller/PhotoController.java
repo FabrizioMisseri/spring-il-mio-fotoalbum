@@ -144,6 +144,7 @@ public class PhotoController {
                               RedirectAttributes redirectAttributes) {
         try {
             photoService.updateCover(id, imageForm);
+
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("message", "Unable to update photo cover");
         } catch (PhotoNotFoundException e) {
