@@ -2,6 +2,8 @@ package org.learning.java.springilmiofotoalbum.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Objects;
 import java.util.Set;
@@ -36,6 +38,7 @@ public class Photo {
     private Boolean visible;
 
     @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(
             name = "photo_category",
             joinColumns = @JoinColumn(name = "photo_id"),
