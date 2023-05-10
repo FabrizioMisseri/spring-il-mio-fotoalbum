@@ -47,6 +47,8 @@ public class Photo {
     @OneToOne(mappedBy = "photo")
     private Image cover;
 
+    private Integer coverId;
+
 
     // GETTERS AND SETTERS
     public Integer getId() {
@@ -127,5 +129,11 @@ public class Photo {
         return Objects.hash(getId(), getTitle(), getDescription(), getUrl(), getVisible(), getCategories());
     }
 
+    public Integer getCoverId() {
+        return coverId;
+    }
 
+    public void setCoverId(Integer coverId) {
+        this.coverId = coverId;
+    }
 }

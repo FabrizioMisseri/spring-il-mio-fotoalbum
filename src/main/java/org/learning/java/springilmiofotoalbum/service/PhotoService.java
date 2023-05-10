@@ -43,6 +43,7 @@ public class PhotoService {
             copyP.setDescription(p.getDescription());
             copyP.setVisible(p.getVisible());
             copyP.setPhotoView(p.getPhotoView());
+            copyP.setCoverId(p.getCover().getId());
             filteredPhotos.add(copyP);
         }
         return filteredPhotos;
